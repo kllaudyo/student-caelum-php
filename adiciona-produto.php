@@ -1,5 +1,6 @@
 <?php
 
+    #require_once("configuracao.php");
     require_once("cabecalho.php");
     require_once("conexao.php");
     require_once("banco-produto.php");
