@@ -1,5 +1,8 @@
 <?php
 
+    require_once("Produto.php");
+    require_once("Categoria.php");
+
     /*
         mysql_[functions] versão mantida por compatibilidade
         mysqli_[functions] versão melhorada e otimizada
@@ -42,8 +45,24 @@
 
         $database_result = mysqli_query($database_connection, $database_query);
         $produtos = array(); // ou []
-        while($produto = mysqli_fetch_assoc($database_result)){
+        
+        while($data = mysqli_fetch_assoc($database_result)){
+            
+            $produto = new Produto();
+            $categoria = new Categoria();
+            
+            $categoria->setNome($data["categoria_nome"]);
+            
+            $produto->setId($data["id"]);
+            $produto->setNome($data["nome"]);
+            $produto->setPreco($data["preco"]);
+            $produto->setDescricao($data["descricao"]);
+            $produto->setCategoria($categoria);
+            $produto->setUsado($data["usado"]);
+            
             array_push($produtos, $produto); // ou $produtos[] = $produto;
+        
         }
+        
         return $produtos;
     }

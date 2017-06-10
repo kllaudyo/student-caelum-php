@@ -1,5 +1,6 @@
 <?php
 
+    require_once("configuracao.php");
     require_once("acesso.php");
     verifica_usuario();
 
@@ -31,26 +32,25 @@
         </thead>
         <tbody>
 <?php
-
     foreach($produtos as $produto):
 ?>
     <tr>
-        <td><?=$produto["id"]?></td>
-        <td><?=$produto["nome"]?></td>
-        <td><?=$produto["preco"]?></td>
-        <td><?=substr($produto["descricao"],0,30);?></td>
-        <td><?=$produto["categoria_nome"];?></td>
-        <td><?=$produto["usado"]==1?"Sim":"Não";?></td>
+        <td><?=$produto->getId();?></td>
+        <td><?=$produto->getNome();?></td>
+        <td><?=$produto->getPreco();?></td>
+        <td><?=substr($produto->getDescricao(),0,30);?></td>
+        <td><?=$produto->getCategoria()->getNome();?></td>
+        <td><?=$produto->getUsado()==1?"Sim":"Não";?></td>
         <td>
             <form action="remove-produto.php" method="post">
-                <input type="hidden" name="id" value="<?=$produto["id"]?>">
+                <input type="hidden" name="id" value="<?=$produto->getId()?>">
                 <button type="submit" class="btn btn-danger">
                     <span class="glyphicon glyphicon-trash"></span> Remover
                 </button>
             </form>
         </td>
     </tr>
-<?php           
+<?php   
     endforeach;
 ?>
         </tbody>

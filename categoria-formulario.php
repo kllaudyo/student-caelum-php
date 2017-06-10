@@ -5,7 +5,7 @@
     require_once("conexao.php");
     require_once("cabecalho.php");
 ?>
-    <h1>Formulário de Cadastro</h1>
+    <h1>Cadastro de Categorias</h1>
     <hr />
     <form action="adiciona-categoria.php" method="post">
         <div class="form-group row">

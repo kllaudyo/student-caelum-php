@@ -6,7 +6,7 @@
     require_once("banco-categoria.php");
     require_once("cabecalho.php");
 ?>   
-    <h1>Formulário de Cadastro</h1>
+    <h1>Cadastro de Produtos</h1>
     <hr />
     <form action="adiciona-produto.php" method="post">
         <div class="form-group row">
