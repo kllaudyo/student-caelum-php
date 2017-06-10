@@ -1,9 +1,9 @@
 body{
-    padding-top:50px;
+    padding-top:20px;
 }
 .principal{
     padding: 40px 15px;
 }
-h1{
+h1,h2{
     text-align: center;
 }
