@@ -5,11 +5,12 @@
 
     require_once("cabecalho.php");
     require_once("conexao.php");
-    require_once("banco-produto.php");
+    require_once("ProdutoDAO.php");
 
     $id = $_POST["id"];
+    $dao = new ProdutoDAO($database_connection);
 
-    if(removeProduto($database_connection, $id)){
+    if($dao->removeProduto($id)){
         header("Location: produto-lista.php?excluido=true");
     }else{
         echo "<div class=\"alert alert-danger\">Não foi possível excluir no banco de dados, verifique seu sql</div>";    

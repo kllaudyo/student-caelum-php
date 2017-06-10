@@ -42,5 +42,4 @@
         </div>
         </div>
     </nav>  
-
-        <section class="principal">
+    <section class="principal">

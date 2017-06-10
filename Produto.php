@@ -16,6 +16,24 @@ class Produto
     private $categoria;
     private $usado;
     
+#    public function __construct($id="", $nome="", $preco=0, $descricao="", $categoria=new Categoria(), $usado=)
+#    {
+#        $this->id = $id;
+#        $this->nome = $nome;
+#        $this->preco = $preco;
+#        $this->descricao = $descricao;
+#        $this->categoria = $categoria;
+#        $this->usado = $usado;
+#    }
+    
+    public function precoComDesconto(){
+        return $this->preco * 0.9;
+    }
+    
+    public function __toString(){
+        return "{$this->id} : {$this->nome} : {$this->preco} : {$this->descricao} : {$this->usado} : {$this->categoria}";
+    }
+    
     public function getId(){
 		return $this->id;
 	}

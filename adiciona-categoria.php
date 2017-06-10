@@ -4,15 +4,17 @@
     require_once("acesso.php");
     verifica_usuario();
     require_once("Categoria.php");
+    require_once("CategoriaDAO.php");
     require_once("cabecalho.php");
     require_once("conexao.php");
-    require_once("banco-categoria.php");
     require_once("bootstrap.php");
 
     $categoria = new Categoria();
     $categoria->setNome($_POST["nome"]);
 
-    if(insereCategoria($database_connection, $categoria))
+    $dao = new CategoriaDAO($database_connection);
+
+    if($dao->insereCategoria($categoria))
     {
         alert_success("Categoria {$categoria->getNome()} adicionada com sucesso!");
     }

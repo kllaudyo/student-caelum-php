@@ -11,6 +11,10 @@ class Categoria
     public $id;
     public $nome;
     
+    public function __toString(){
+        return "{$this->id} : {$this->nome}";
+    }
+    
     public function getId(){
 		return $this->id;
 	}

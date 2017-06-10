@@ -8,12 +8,12 @@
     require_once("conexao.php");
     require_once("Produto.php");
     require_once("Categoria.php");
-    require_once("banco-produto.php");
+    require_once("ProdutoDAO.php");
     require_once("bootstrap.php");
 
     $categoria = new Categoria();
     $produto = new Produto();
-
+    $produto->setId($_POST["id"]);
     $produto->setNome($_POST["nome"]);
     $produto->setPreco($_POST["preco"]);
     $produto->setDescricao($_POST["descricao"]);
@@ -21,9 +21,10 @@
     $produto->setCategoria($categoria);
     $produto->setUsado(isset($_POST["usuado"]) ? "true" : "false");
 
-    if(insereProduto($database_connection, $produto))
+    $dao = new ProdutoDAO($database_connection);
+    if($dao->salvaProduto($produto))
     {
-        alert_success("Produto {$produto->getNome()}, R$ {$produto->getPreco()} adicionado com sucesso!");
+        alert_success("Produto {$produto->getNome()}, R$ {$produto->getPreco()} salvo com sucesso!");
     }
     else
     {
