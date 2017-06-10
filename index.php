@@ -1,5 +1,5 @@
 <?php
-require_once("acesso.php");
+    require_once("acesso.php");
     require_once("cabecalho.php");
     require_once("bootstrap.php");
 

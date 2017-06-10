@@ -10,13 +10,13 @@
         mysqli_query = retorna resultSet caso sql query
     */
 
-    function insereProduto($database_connection, $nome, $preco, $descricao, $categoria_id, $usado)
+    function insereProduto($database_connection, $produto)
     {
         $database_query = "insert 
                              into produtos
                                   (nome, preco, descricao, categoria_id, usado) 
                            values 
-                                  ('{$nome}', {$preco}, '{$descricao}', {$categoria_id}, {$usado})";
+                                  ('{$produto->nome}', {$produto->preco}, '{$produto->descricao}', {$produto->categoria_id}, {$produto->usado})";
 
         $database_result = mysqli_query($database_connection, $database_query);
         return $database_result;
