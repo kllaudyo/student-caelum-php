@@ -1,20 +1,20 @@
 <?php
 
-    #require_once("configuracao.php");
+    require_once("configuracao.php");
     require_once("acesso.php");
     verifica_usuario();
-
+    require_once("Categoria.php");
     require_once("cabecalho.php");
     require_once("conexao.php");
     require_once("banco-categoria.php");
     require_once("bootstrap.php");
 
+    $categoria = new Categoria();
+    $categoria->setNome($_POST["nome"]);
 
-    $nome = $_POST["nome"];
-
-    if(insereCategoria($database_connection, $nome))
+    if(insereCategoria($database_connection, $categoria))
     {
-        alert_success("Categoria {$nome} adicionada com sucesso!");
+        alert_success("Categoria {$categoria->getNome()} adicionada com sucesso!");
     }
     else
     {

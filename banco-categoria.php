@@ -1,8 +1,8 @@
 <?php
 
-    function insereCategoria($database_connection, $nome)
+    function insereCategoria($database_connection, $categoria)
     {
-        $database_query = "insert into categorias(nome) values ('{$nome}')";
+        $database_query = "insert into categorias(nome) values ('{$categoria->getNome()}')";
         $database_result = mysqli_query($database_connection, $database_query);
         return $database_result;
     }

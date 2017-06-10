@@ -26,7 +26,7 @@
                 <label for="email">Email:</label>
             </div>
             <div class="col-sm-10">
-                <input type="text" name="email" id="email" class="form-control" value="<?=$_COOKIE["login"] ?? ''?>" />
+                <input type="text" name="email" id="email" class="form-control" value="<?=isset($_COOKIE["login"])?$_COOKIE["login"]:''?>" />
             </div>
         </div>
         <hr />

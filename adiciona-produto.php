@@ -14,16 +14,16 @@
     $categoria = new Categoria();
     $produto = new Produto();
 
-    $produto->nome = $_POST["nome"];
-    $produto->preco = $_POST["preco"];
-    $produto->descricao = $_POST["descricao"];
-    $categoria->id = $_POST["categoria"];
-    $produto->categoria = $categoria;
-    $produto->usado = isset($_POST["usuado"]) ? "true" : "false";
+    $produto->setNome($_POST["nome"]);
+    $produto->setPreco($_POST["preco"]);
+    $produto->setDescricao($_POST["descricao"]);
+    $categoria->setId($_POST["categoria"]);
+    $produto->setCategoria($categoria);
+    $produto->setUsado(isset($_POST["usuado"]) ? "true" : "false");
 
     if(insereProduto($database_connection, $produto))
     {
-        alert_success("Produto {$produto->nome}, R$ {$produto->preco} adicionado com sucesso!");
+        alert_success("Produto {$produto->getNome()}, R$ {$produto->getPreco()} adicionado com sucesso!");
     }
     else
     {

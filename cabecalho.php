@@ -10,7 +10,7 @@
 </head>
 <body>
     <main class="container">
-    <nav class="navbar navbar-default ">
+    <nav class="navbar navbar-inverse ">
         <div class="container">
         <div class="container-fluid">
             <div class="navbar-header">

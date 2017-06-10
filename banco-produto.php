@@ -16,7 +16,7 @@
                              into produtos
                                   (nome, preco, descricao, categoria_id, usado) 
                            values 
-                                  ('{$produto->nome}', {$produto->preco}, '{$produto->descricao}', {$produto->categoria->id}, {$produto->usado})";
+                                  ('{$produto->getNome()}', {$produto->getPreco()}, '{$produto->getDescricao()}', {$produto->getCategoria()->getId()}, {$produto->getUsado()})";
 
         $database_result = mysqli_query($database_connection, $database_query);
         return $database_result;
