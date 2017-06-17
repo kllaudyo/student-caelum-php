@@ -21,7 +21,7 @@ class ProdutoDAO
         }
     }
 
-    public function insereProduto(Produto $produto)
+    public function insereProduto($produto)
     {
         $isbn = "";
         if($produto->temIsbn()){
@@ -33,7 +33,7 @@ class ProdutoDAO
             $waterMark = $produto->getWaterMark();
         }
 
-        $taxaImpressao = "";
+        $taxaImpressao = "null";
         if($produto->temTaxaImpressao()){
             $taxaImpressao = $produto->getTaxaImpressao();
         }
@@ -52,6 +52,7 @@ class ProdutoDAO
                                   , {$taxaImpressao}
                                   )";
 
+        error_log($database_query);
         $database_result = mysqli_query($this->database_connection, $database_query);
         return $database_result;
     }
@@ -68,21 +69,23 @@ class ProdutoDAO
             $waterMark = $produto->getWaterMark();
         }
 
-        $taxaImpressao = "";
+        $taxaImpressao = "null";
         if($produto->temTaxaImpressao()){
             $taxaImpressao = $produto->getTaxaImpressao();
         }
 
         $database_query = "update produtos 
                               set nome='{$produto->getNome()}'
-                                 ,preco='{$produto->getPreco()}'
-                                 ,descricao='{$produto->getDescricao()}'
-                                 ,categoria_id='{$produto->getCategoria()->getId()}'
-                                 ,usado='{$produto->getUsado()}'
-                                 ,isbn='{$isbn}'
-                                 ,waterMark='{$waterMark}'
-                                 ,taxaImpressao = '{$taxaImpressao}'
+                                 ,preco = {$produto->getPreco()}
+                                 ,descricao = '{$produto->getDescricao()}'
+                                 ,categoria_id = '{$produto->getCategoria()->getId()}'
+                                 ,usado = {$produto->getUsado()}
+                                 ,isbn = '{$isbn}'
+                                 ,waterMark = '{$waterMark}'
+                                 ,taxaImpressao = {$taxaImpressao}
                             where id = {$produto->getId()} ";
+
+        error_log($database_query);
 
         $database_result = mysqli_query($this->database_connection, $database_query);
         return $database_result;

@@ -3,29 +3,40 @@
  */
 $(document).ready(function(evt){
 
-    //USANDO JQUERY DIRETO
-    // $("#tipoProduto")
-    //     .on("change", function(evt){
-    //         var tipo = $(this).val();
-    //         if(tipo==="livro"){
-    //             $(".isbn").show();
-    //         }else{
-    //             $(".isbn").hide();
-    //         }
-    //     })
-    //     .change();
-
-    //USANDO DATA-ATRIBUTE
-    if(!$("form").data("livro")){
+    var showProduto = function(){
         $(".isbn").hide();
+        $(".watermark").hide();
+        $(".taxa").hide();
     };
 
-     $("#tipoProduto").on("change", function(evt){
-         var tipo = $(this).val();
-         if(tipo==="livro"){
-             $(".isbn").show();
-         }else{
-             $(".isbn").hide();
-         }
-     });
+    var showEbook = function(){
+        $(".isbn").show();
+        $(".watermark").show();
+        $(".taxa").hide();
+    };
+
+    var showLivroFisico = function(){
+        $(".isbn").show();
+        $(".watermark").hide();
+        $(".taxa").show();
+    };
+
+    $("#tipoProduto")
+        .on("change", function(evt){
+            switch($(this).val()){
+                case "Produto":
+                    showProduto();
+                    break;
+                case "Ebook":
+                    showEbook();
+                    break;
+                case "LivroFisico":
+                    showLivroFisico();
+                    break;
+            }
+        })
+        .change();
+
 });
+
+

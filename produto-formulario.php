@@ -84,8 +84,8 @@
                 <select class="form-control" name="tipoProduto" id="tipoProduto">
                     <option value="Produto" <?=(!$produto->temIsbn())?"selected":"";?>>Geral</option>
                     <optgroup label="Livro">
-                        <option value="Ebook">Livro Eletrônico</option>
-                        <option value="LivroFisico">Livro Físico</option>
+                        <option value="Ebook" <?=($produto->temWaterMark())?"selected":"";?>>Livro Eletrônico</option>
+                        <option value="LivroFisico" <?=($produto->temTaxaImpressao())?"selected":"";?>>Livro Físico</option>
                     </optgroup>
                 </select>
             </div>
@@ -106,7 +106,7 @@
             </div>
         </div>
         <hr class="isbn" />
-        <div class="form-group row ">
+        <div class="form-group row watermark">
             <div class="col-sm-2">
                 <label for="watermark">Watermark (quando for um ebook):</label>
             </div>
@@ -120,8 +120,8 @@
                 <input type="text" class="form-control" id="watermark" name="waterMark" value="<?=$waterMark;?>" />
             </div>
         </div>
-        <hr />
-        <div class="form-group row">
+        <hr class="watermark" />
+        <div class="form-group row taxa">
             <div class="col-sm-2">
                 <label for="taxaImpressao">Taxa de impressão(quando for um um livro físico):</label>
             </div>
@@ -135,7 +135,7 @@
                 <input type="number" class="form-control" id="taxaImpressao" name="taxaImpressao" value="<?=$taxaImpressao;?>" />
             </div>
         </div>
-        <hr />
+        <hr class="taxa" />
         <div class="row">
             <button class="btn btn-primary pull-right" type="submit"><span class="glyphicon glyphicon-floppy-disk"></span> Cadastrar</button>
         </div>

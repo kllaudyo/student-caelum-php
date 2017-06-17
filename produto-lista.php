@@ -30,6 +30,8 @@
             <th>Categoria</th>
             <th>Usado</th>
             <th>Isbn</th>
+            <th>WaterMark</th>
+            <th>Taxa</th>
             <th>Ações</th>
         </thead>
         <tbody>
@@ -39,12 +41,14 @@
     <tr>
         <td><?=$produto->getId();?></td>
         <td><?=$produto->getNome();?></td>
-        <td><?=$produto->getPreco();?></td>
-        <td><?=$produto->precoComDesconto();?></td>
+        <td>R$ <?=number_format($produto->getPreco(),2,',','.');?></td>
+        <td>R$ <?=number_format($produto->precoComDesconto(),2,',','.');?></td>
         <td><?=substr($produto->getDescricao(),0,30);?></td>
         <td><?=$produto->getCategoria()->getNome();?></td>
         <td><?=$produto->getUsado()==1?"Sim":"Não";?></td>
         <td><?=($produto->temIsbn())?$produto->getIsbn():"";?></td>
+        <td><?=($produto->temWaterMark())?$produto->getWaterMark():"";?></td>
+        <td><?=($produto->temTaxaImpressao())?$produto->getTaxaImpressao():"";?></td>
         <td>
             <a href="produto-formulario.php?id=<?=$produto->getId();?>" class="btn btn-warning"><span class="glyphicon glyphicon-edit"></span> Editar</a>
             <form action="remove-produto.php" method="post">
