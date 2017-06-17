@@ -14,10 +14,10 @@
         $produto->setCategoria(new Categoria());
     }
 
-?>   
+?>
     <h1>Cadastro de Produtos</h1>
     <hr />
-    <form action="adiciona-produto.php" method="post" data-livro="<?=$produto->temIsbn();?>">
+    <form action="adiciona-produto.php" method="post">
         <input type="hidden" name="id" value="<?=$produto->getId();?>" />
         <div class="form-group row">
             <div class="col-sm-2">

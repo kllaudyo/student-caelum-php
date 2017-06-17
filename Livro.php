@@ -25,9 +25,6 @@ abstract class Livro extends Produto
         $this->isbn = $isbn;
     }
 
-    public function precoComDesconto()
-    {
-        return $this->preco * 0.5;
-    }
+//    public abstract function precoComDesconto();
 
 }

@@ -33,12 +33,13 @@
                         </ul>
                     </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="contato.php">Contato</a></li>
                 <?php if(usuario_esta_logado()):?>
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="#" class="active">Bem vindo <strong><?=usuario_logado();?></strong></a></li>
-                        <li><a href="logout.php">Sair</a></li>
-                    </ul>
+                    <li><a href="#" class="active">Bem vindo <strong><?=usuario_logado();?></strong></a></li>
+                    <li><a href="logout.php">Sair</a></li>
                 <?php endif; ?>
+                </ul>
             </div>
         </div>
         </div>

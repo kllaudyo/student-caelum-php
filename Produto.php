@@ -26,7 +26,7 @@ class Produto
 #        $this->categoria = $categoria;
 #        $this->usado = $usado;
 #    }
-    
+
     public function precoComDesconto(){
         return $this->preco * 0.9;
     }

@@ -25,4 +25,9 @@ class LivroFisico extends Livro
         $this->taxaImpressao = $taxaImpressao;
     }
 
+    public function precoComDesconto()
+    {
+        return $this->preco * 0.7;
+    }
+
 }

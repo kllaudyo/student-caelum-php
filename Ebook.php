@@ -25,6 +25,9 @@ class Ebook extends Livro
         $this->waterMark = $waterMark;
     }
 
-
+    public function precoComDesconto()
+    {
+        return $this->preco * 0.1;
+    }
 
 }
