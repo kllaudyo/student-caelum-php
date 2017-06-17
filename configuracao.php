@@ -11,3 +11,10 @@
         print "<pre>";
         die();
     }
+
+    function auto_loading($class_name)
+    {
+        require_once "{$class_name}.php";
+    }
+
+    spl_autoload_register("auto_loading");

@@ -11,10 +11,11 @@ class Produto
 {
     private $id;
     private $nome;
-    private $preco;
     private $descricao;
     private $categoria;
     private $usado;
+
+    protected $preco;
     
 #    public function __construct($id="", $nome="", $preco=0, $descricao="", $categoria=new Categoria(), $usado=)
 #    {
@@ -81,4 +82,17 @@ class Produto
 	public function setUsado($usado){
 		$this->usado = $usado;
 	}
+
+	public function temIsbn(){
+	    return $this->temWaterMark() || $this->temTaxaImpressao();
+    }
+
+    public function temWaterMark(){
+	    return $this instanceof Ebook;
+    }
+
+    public function temTaxaImpressao(){
+        return $this instanceof LivroFisico;
+    }
+
 }

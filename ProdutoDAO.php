@@ -21,16 +21,36 @@ class ProdutoDAO
         }
     }
 
-    public function insereProduto($produto)
+    public function insereProduto(Produto $produto)
     {
+        $isbn = "";
+        if($produto->temIsbn()){
+            $isbn = $produto->getIsbn();
+        }
+
+        $waterMark = "";
+        if($produto->temWaterMark()){
+            $waterMark = $produto->getWaterMark();
+        }
+
+        $taxaImpressao = "";
+        if($produto->temTaxaImpressao()){
+            $taxaImpressao = $produto->getTaxaImpressao();
+        }
+
         $database_query = "insert 
                              into produtos
-                                  (nome, preco, descricao, categoria_id, usado) 
+                                  (nome, preco, descricao, categoria_id, usado, isbn, waterMark, taxaImpressao) 
                            values 
-                                  ('{$produto->getNome()}', {$produto->getPreco()} 
+                                  ('{$produto->getNome()}'
+                                  , {$produto->getPreco()} 
                                   ,'{$produto->getDescricao()}'
                                   , {$produto->getCategoria()->getId()}
-                                  , {$produto->getUsado()})";
+                                  , {$produto->getUsado()}
+                                  , '{$isbn}'
+                                  , '{$waterMark}'
+                                  , {$taxaImpressao}
+                                  )";
 
         $database_result = mysqli_query($this->database_connection, $database_query);
         return $database_result;
@@ -38,12 +58,30 @@ class ProdutoDAO
 
     public function alteraProduto($produto)
     {
+        $isbn = "";
+        if($produto->temIsbn()){
+            $isbn = $produto->getIsbn();
+        }
+
+        $waterMark = "";
+        if($produto->temWaterMark()){
+            $waterMark = $produto->getWaterMark();
+        }
+
+        $taxaImpressao = "";
+        if($produto->temTaxaImpressao()){
+            $taxaImpressao = $produto->getTaxaImpressao();
+        }
+
         $database_query = "update produtos 
                               set nome='{$produto->getNome()}'
-                                 ,preco={$produto->getPreco()}
+                                 ,preco='{$produto->getPreco()}'
                                  ,descricao='{$produto->getDescricao()}'
                                  ,categoria_id='{$produto->getCategoria()->getId()}'
-                                 ,usado={$produto->getUsado()}
+                                 ,usado='{$produto->getUsado()}'
+                                 ,isbn='{$isbn}'
+                                 ,waterMark='{$waterMark}'
+                                 ,taxaImpressao = '{$taxaImpressao}'
                             where id = {$produto->getId()} ";
 
         $database_result = mysqli_query($this->database_connection, $database_query);
@@ -71,11 +109,26 @@ class ProdutoDAO
         $database_result = mysqli_query($this->database_connection, $database_query);
         $produtos = array(); // ou []
 
-        while($data = mysqli_fetch_assoc($database_result)){
+        while($data = mysqli_fetch_assoc($database_result))
+        {
+            if($data["isbn"]=="")
+            {
+                $produto = new Produto();
+            }
+            elseif($data["waterMark"]!="")
+            {
+                $produto = new Ebook();
+                $produto->setIsbn($data["isbn"]);
+                $produto->setWaterMark($data["waterMark"]);
+            }
+            else
+            {
+                $produto = new LivroFisico();
+                $produto->setIsbn($data["isbn"]);
+                $produto->setTaxaImpressao($data["taxaImpressao"]);
+            }
 
-            $produto = new Produto();
             $categoria = new Categoria();
-
             $categoria->setNome($data["categoria_nome"]);
 
             $produto->setId($data["id"]);
@@ -105,12 +158,30 @@ class ProdutoDAO
                              ";
         $database_result = mysqli_query($this->database_connection, $database_query);
 
-        $produto = new Produto();
-        $categoria = new Categoria();
-        $produto->setCategoria($categoria);
+
 
         if($data = mysqli_fetch_assoc($database_result))
         {
+            if($data["isbn"]=="")
+            {
+                $produto = new Produto();
+            }
+            elseif($data["waterMark"]!="")
+            {
+                $produto = new Ebook();
+                $produto->setIsbn($data["isbn"]);
+                $produto->setWaterMark($data["waterMark"]);
+            }
+            else
+            {
+                $produto = new LivroFisico();
+                $produto->setIsbn($data["isbn"]);
+                $produto->setTaxaImpressao($data["taxaImpressao"]);
+            }
+
+            $categoria = new Categoria();
+            $produto->setCategoria($categoria);
+
             $categoria->setId($data["categoria_id"]);
             $categoria->setNome($data["categoria_nome"]);    
             $produto->setId($data["id"]);
@@ -118,8 +189,11 @@ class ProdutoDAO
             $produto->setPreco($data["preco"]);
             $produto->setDescricao($data["descricao"]);    
             $produto->setUsado($data["usado"]);
+
+            return $produto;
         }
-        return $produto;
+
+        return  null;
     }
 
 }

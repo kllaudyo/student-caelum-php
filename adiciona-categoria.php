@@ -3,8 +3,6 @@
     require_once("configuracao.php");
     require_once("acesso.php");
     verifica_usuario();
-    require_once("Categoria.php");
-    require_once("CategoriaDAO.php");
     require_once("cabecalho.php");
     require_once("conexao.php");
     require_once("bootstrap.php");

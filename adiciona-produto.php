@@ -6,13 +6,29 @@
     require_once("configuracao.php");
     require_once("cabecalho.php");
     require_once("conexao.php");
-    require_once("Produto.php");
-    require_once("Categoria.php");
-    require_once("ProdutoDAO.php");
     require_once("bootstrap.php");
 
     $categoria = new Categoria();
-    $produto = new Produto();
+    $tipo = $_POST["tipoProduto"];
+
+    if($tipo=="Ebook")
+    {
+        $produto = new Ebook();
+        $produto->setIsbn($_POST["isbn"]);
+        $produto->setWaterMark($_POST["waterMark"]);
+    }
+    elseif($tipo=="LivroFisico")
+    {
+        $produto = new LivroFisico();
+        $produto->setIsbn($_POST["isbn"]);
+        $produto->setTaxaImpressao($_POST["taxaImpressao"]);
+    }
+    else
+    {
+        $produto = new Produto();
+    }
+
+
     $produto->setId($_POST["id"]);
     $produto->setNome($_POST["nome"]);
     $produto->setPreco($_POST["preco"]);

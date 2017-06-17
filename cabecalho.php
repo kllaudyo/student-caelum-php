@@ -7,6 +7,7 @@
     <title>Minha Loja</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/loja.css">
+    <script src="js/jquery.min.js"></script>
 </head>
 <body>
     <main class="container">
